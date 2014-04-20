@@ -1,0 +1,70 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><title>I'm DIGgin it.</title><meta name="generator" content="Hovercraft! 1.0 http://regebro.github.com/hovercraft"></meta><meta name="author" content="Paul Logston"></meta><meta name="description" content="A talk on the Domain Information Groper command line utility."></meta><meta name="keywords" content="dig, command line, POSIX, unix"></meta><link rel="stylesheet" href="css/hovercraft.css" media="all"></link><link rel="stylesheet" href="css/impressConsole.css" media="all"></link><link rel="stylesheet" href="css/highlight.css" media="all"></link><link rel="stylesheet" href="css/presentation.css" media="screen,projection"></link></head><body class="impress-not-supported"><div id="impress"><div class="step" step="0" data-x="0" data-y="0"><h1 id="i-m-diggin-it">I'm DIGgin it!</h1><h2 id="the-domain-information-groper">The Domain Information Groper</h2><img src="media/dig.jpg" alt="" width="400" height="400"></img><div class="line-block">SLIDES: <strong>http://logston.github.io/dig</strong><br></br></div><p>Thursday, May 1st 2014</p></div><div class="step" step="1" data-x="1600" data-y="0"><h1 id="using-dig">Using dig</h1><pre class="highlight ">$ dig nycpython.com
+
+; &lt;&lt;&gt;&gt; DiG 9.8.1-P1 &lt;&lt;&gt;&gt; nycpython.com
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 52392
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;nycpython.com.                 IN      A
+
+;; ANSWER SECTION:
+nycpython.com.          1799    IN      A       54.204.41.210
+
+;; Query time: 135 msec
+;; SERVER: 10.0.2.3#53(10.0.2.3)
+;; WHEN: Sat Apr 19 21:35:49 2014
+;; MSG SIZE  rcvd: 47</pre></div><div class="step" step="2" data-x="3200" data-y="0"><h1 id="output-sections">Output SECTIONS</h1><pre class="highlight ">$ dig nycpython.com
+...</pre><pre class="highlight ">;; QUESTION SECTION:
+;nycpython.com.                 IN      A</pre><pre class="highlight ">;; ANSWER SECTION:
+nycpython.com.          1799    IN      A       54.204.41.210</pre><pre class="highlight ">Authority and Additional Sections.</pre><pre class="highlight ">;; Query time: 135 msec
+;; SERVER: 10.0.2.3#53(10.0.2.3)
+;; WHEN: Sat Apr 19 21:35:49 2014
+;; MSG SIZE  rcvd: 47</pre></div><div class="step" step="3" data-x="4800" data-y="0"><h1 id="options">Options</h1><pre class="highlight ">(Specify Sections)
++[no]stats
++[no]answer
++[no]...
+
+eg. $ dig nycpython.com +nostats
+    ...</pre><pre class="highlight ">(Specify a file with multiple FQDNs)
+-f &lt;file&gt;
+
+eg. $ dig -f names.txt
+    ...</pre><pre class="highlight ">(Just grab the IP)
++short
+
+eg. $ dig nycpython.com +short
+    54.204.41.210</pre></div><div class="step" step="4" data-x="6400" data-y="0"><h1 id="id1">Options</h1><pre class="highlight ">(Specify type of DNS record)
+-t MX or MX
+
+eg. $ dig nycpython.com -t MX
+    ...
+
+    $ dig nycpython.com MX
+    ...</pre></div><div class="step" step="5" data-x="8000" data-y="0"><h1 id="id2">Options</h1><pre class="highlight ">$ dig nycpython.com +trace
+
+; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; nycpython.com +trace
+;; global options: +cmd
+.                       326518  IN      NS      b.root-servers.net.
+.                       326518  IN      NS      i.root-servers.net.
+.                       326518  IN      NS      f.root-servers.net.
+                        ...
+
+;; Received 228 bytes from 192.168.1.1#53(192.168.1.1) in 88 ms
+
+com.                    172800  IN      NS      i.gtld-servers.net.
+com.                    172800  IN      NS      a.gtld-servers.net.
+com.                    172800  IN      NS      k.gtld-servers.net.
+                        ...
+
+;; Received 503 bytes from 192.33.4.12#53(192.33.4.12) in 27 ms
+
+nycpython.com.          172800  IN      NS      ns1.badger.com.
+nycpython.com.          172800  IN      NS      ns2.badger.com.
+;; Received 106 bytes from 192.42.93.30#53(192.42.93.30) in 273 ms
+
+nycpython.com.          1800    IN      A       54.204.41.210
+nycpython.com.          3600    IN      NS      ns2.badger.com.
+nycpython.com.          3600    IN      NS      ns1.badger.com.
+;; Received 90 bytes from 54.246.101.22#53(54.246.101.22) in 100 ms</pre></div><div class="step" step="6" data-x="9600" data-y="0"><h1 id="questions">Questions</h1><img src="media/dog_dig.jpg" alt="" width="400" height="400"></img><h2 id="my-own-quetions">My Own Quetions</h2><blockquote><ul><li>Why are there <tt>;;</tt> in front of info for dig?</li></ul></blockquote></div></div><div id="hovercraft-help"><table><tr><th>Space</th><td>Forward</td></tr><tr><th>Left, Down, Page Down</th><td>Next slide</td></tr><tr><th>Right, Up, Page Up</th><td>Previous slide</td></tr><tr><th>P</th><td>Open presenter console</td></tr><tr><th>H</th><td>Toggle this help</td></tr></table></div><script type="text/javascript" src="js/impress.js"></script><script type="text/javascript" src="js/impressConsole.js"></script><script type="text/javascript" src="js/hovercraft.js"></script></body></html>
